@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <description>该spring 配置文件，主要维护系统框架的bean信息</description>
+
+  <bean id="jdbcHandler" class="com.soak.framework.jdbc.JdbcHandler" init-method="getInstance" lazy-init="false"/>
+
+  <bean id="basicDao" class="com.soak.framework.dao.imp.BasicDaoImp" lazy-init="false">
+    <property name="jdbcHandler">
+      <ref bean="jdbcHandler" />
+    </property>
+  </bean>
+
+
+
+  <bean id="basicService" class="com.soak.framework.service.Imp.BasicServiceImp" lazy-init="true">
+    <property name="basicDao">
+      <ref bean="basicDao" />
+    </property>
+  </bean>
+
+  <bean id="ehCache" class="com.soak.framework.cache.EhCacheImpl" lazy-init="true" />
+
+</beans>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+
+
+  <!-- AOP 配置  -->
+
+  <bean id="job" class="com.soak.infoRecod.service.imp.InfoServiceImp"></bean>
+
+  <!--  advice -->
+  <bean id="LogerComputer" class="com.soak.framework.aop.TestBean"></bean>
+
+
+  <!-- 代理类.调用的时候则是调用这个代理类 -->
+  <bean id="ProxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+    <!-- 代理接口（业务类接口）  -->
+    <property name="proxyInterfaces">
+      <value>com.soak.infoRecod.service.InfoRecordService</value>
+    </property> 
+    <!-- 业务实现类  -->
+    <property name="target">
+      <ref bean="job" />
+    </property>
+    <!-- 通知 -->
+    <property name="interceptorNames">
+      <list>
+        <value>DefaultAdvisor</value>
+      </list>
+    </property>
+  </bean>
+
+  <!-- 通知 -->
+  <bean id="DefaultAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+    <property name="pointcut">
+      <ref bean="JdkRegexpPointcut" />
+    </property>
+    <property name="advice">
+      <ref bean="LogerComputer" />
+    </property>
+  </bean>
+
+  <!-- 切点  -->
+  <bean id="JdkRegexpPointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut">
+    <!-- 需要对那些方法进行拦截 -->
+    <property name="patterns">
+      <list>
+        <value>.*hello</value>
+        <value>.*hello.*</value>
+        <value>hello</value>
+      </list>
+    </property>
+  </bean>
+
+
+</beans>

@@ -33,7 +33,7 @@
           </connectors>
         </configuration>
       </plugin>
-      
+
       <!-- Tomcat 插件 -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -124,7 +124,17 @@
     </dependency>
     <dependency>
       <groupId>com.soak</groupId>
+      <artifactId>jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.soak</groupId>
       <artifactId>etl</artifactId>
+    </dependency>
+
+
+    <dependency>
+      <groupId>javax.persistence</groupId>
+      <artifactId>persistence-api</artifactId>
     </dependency>
 
     <!--  Spring  -->
@@ -159,14 +169,36 @@
       <artifactId>struts2-core</artifactId>
     </dependency>
 
+
+
+    <!-- 网络爬虫  start  -->
+    <!--  HTTP协议的客户端编程工具包 -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+    </dependency>
+
+    <!-- HTML解析器  -->
+    <dependency>
+      <groupId>org.htmlparser</groupId>
+      <artifactId>htmlparser</artifactId>
+    </dependency>
+
+    <!-- HTML解析器 -->
+    <dependency>
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+    </dependency>
+    <!-- 网络爬虫   end  -->
+
     <dependency>
       <groupId>net.sf.json-lib</groupId>
       <artifactId>json-lib</artifactId>
       <classifier>jdk15</classifier>
     </dependency>
-      
+
     <dependency>
-      <groupId>jfree</groupId> 
+      <groupId>jfree</groupId>
       <artifactId>jfreechart</artifactId>
     </dependency>
 
