@@ -1,6 +1,7 @@
 package com.soak.invest.bond.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;  
 import javax.persistence.Entity;  
@@ -8,7 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;  
 import javax.persistence.Table;  
 
-
+@Entity
+@Table(schema = "finance", name = "bond")
 public class Bond implements Serializable{
 
   private static final long serialVersionUID = 1L;
@@ -16,19 +18,44 @@ public class Bond implements Serializable{
   @Id
   @Column
   private String code; // 代码
-  
+
+  @Column
   private String name; // 名称
+  
+  @Column
   private Float facePrice; // 面值
+
+  @Column
   private Float netPrice; // 净价
+  
+  @Column
   private Float fullPrice; // 全价
+  
+  @Column
   private Float accruedInterest; // 应计利息
+  
+  @Column
   private Float turnVolume; // 成交额(万元)
+  
+  @Column
   private Integer inpaydays; // 距付息天数 Interest payment days
+  
+  @Column
   private Float couponRate; // 票息
+  
+  @Column
   private String bondCredit; // 债券信用
+  
+  @Column
   private String mainCredit; // 主体信用
+  
+  @Column
   private String assukind; // 担保方式
-  private String dueDate; // 到期日
+  
+  @Column
+  private Date dueDate; // 到期日
+  
+  @Column
   private Float amount; // 规模 (亿)
 
   public String getCode() {
@@ -127,14 +154,6 @@ public class Bond implements Serializable{
     this.assukind = assukind;
   }
 
-  public String getDueDate() {
-    return dueDate;
-  }
-
-  public void setDueDate(String dueDate) {
-    this.dueDate = dueDate;
-  }
-
   public Float getAmount() {
     return amount;
   }
@@ -142,5 +161,15 @@ public class Bond implements Serializable{
   public void setAmount(Float amount) {
     this.amount = amount;
   }
+
+  public Date getDueDate() {
+    return dueDate;
+  }
+
+  public void setDueDate(Date dueDate) {
+    this.dueDate = dueDate;
+  }
+  
+  
 
 }

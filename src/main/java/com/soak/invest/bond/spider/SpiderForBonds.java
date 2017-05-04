@@ -15,18 +15,11 @@ import org.jsoup.helper.HttpConnection;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import com.soak.invest.bond.dao.BondDao;
-import com.soak.invest.bond.dao.impl.BondDaoImpl;
+import com.soak.common.date.DateUtil;
 import com.soak.invest.bond.model.Bond;
-import com.soak.network.spider.core.Spider;
 
-public class SpiderForBonds extends Spider {
+public class SpiderForBonds {
 
-  @Override
-  public void execute() {
-    String url = "http://basic.10jqka.com.cn/122695/dividend.html"; // 通过 债券现金流 计算 债券剩余面值
-
-  }
 
   // 通过 集思录 取 债券 数据
   public List<Bond> getBonds() {
@@ -73,13 +66,14 @@ public class SpiderForBonds extends Spider {
         bond.setBondCredit(tds.get(14).text()); // 
         bond.setMainCredit(tds.get(15).text()); // 
         bond.setAssukind(tds.get(16).text()); // 
-        bond.setDueDate(tds.get(17).text()); // 
+        bond.setDueDate(DateUtil.parseShortDate(tds.get(17).text())); // 
 
         // for (int j = 0; j < tds.size(); j++) {
         // String oldClose = tds.get(j).text();
         // System.out.println(oldClose);
         // }
         bonds.add(bond);
+        
       }
     } catch (IOException e) {
       e.printStackTrace();
@@ -132,14 +126,4 @@ public class SpiderForBonds extends Spider {
     return balance;
   }
 
-  public static void  main(String args[]) {
-    SpiderForBonds splider = new SpiderForBonds();
-    List<Bond> bonds = splider.getBonds();
-    BondDao bondDao = new BondDaoImpl();
-
-    for (Bond bond : bonds) {
-      bondDao.addBond(bond);
-    }
-
-  }
 }

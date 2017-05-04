@@ -1,4 +1,4 @@
-package com.soak.network.spider.core;
+/*package com.soak.network.spider.core;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -7,7 +7,8 @@ import java.util.Map;
 import org.apache.http.client.HttpClient;
 import org.apache.http.protocol.HttpContext;
 
-import com.soak.network.spider.core.item.SpiderForIBM;
+import com.soak.invest.bond.spider.SpiderForBonds;
+
 
 
 //这里这个Spider类用于跟View层打交道,相当于是一个Spider的工厂类,可以用这个类拿到
@@ -17,7 +18,7 @@ public abstract class Spider {
 	private static Map<String,Class<? extends Spider>> spiders = new HashMap<String,Class<? extends Spider>>();
 	
 	static{
-		spiders.put("www.ibm.com", SpiderForIBM.class);
+//		spiders.put("www.ibm.com", SpiderForIBM.class);
 //		spiders.put("basic.10jqka.com.cn", SpiderForBonds.class);
 	}
 	
@@ -65,3 +66,4 @@ public abstract class Spider {
 	
 	public abstract void execute();
 }
+*/

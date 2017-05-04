@@ -16,9 +16,7 @@ public class SpiderForBondsTest {
     List<Bond> bonds = splider.getBonds();
     BondDao bondDao = new BondDaoImpl();
     bondDao.wipeBonds();
-    for (Bond bond : bonds) {
-      bondDao.addBond(bond);
-    }
+    bondDao.addBonds(bonds);
 
   }
 
