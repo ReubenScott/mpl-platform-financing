@@ -1,0 +1,1 @@
+package com.soak.invest.finance.dao;import java.util.List;import com.soak.invest.stock.model.Stock;public interface FinancialStatementDao {    public void addBond(Stock... stock);  public void addBonds(List<Stock> stocks);    public boolean wipeStocks();    }
