@@ -1,10 +1,13 @@
 package com.soak.invest.bond.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.soak.invest.bond.model.Bond;
 
 public interface BondDao {
+  
+  public void deleteBondsByDate(Date sourceDate) ;
   
   public void addBond(Bond... bond);
 

@@ -26,7 +26,7 @@ public class SpiderForBonds {
     List<Bond> bonds = new ArrayList<Bond>();
     String url = "https://www.jisilu.cn/data/bond/?do_search=true&forall=1&treasury=0&from_issuer_rating=1&from_volume=0&to_issuer_rating=99";
     try {
-
+      Date sysDate = DateUtil.getCurrentShortDate();
       Connection connect = HttpConnection.connect(url);
       // Connection connect = Jsoup.connect(url);
       // connect.timeout(timeout);
@@ -67,11 +67,15 @@ public class SpiderForBonds {
         bond.setMainCredit(tds.get(15).text()); // 
         bond.setAssukind(tds.get(16).text()); // 
         bond.setDueDate(DateUtil.parseShortDate(tds.get(17).text())); // 
+        bond.setAmount(Float.valueOf(tds.get(18).text())); // 
 
         // for (int j = 0; j < tds.size(); j++) {
         // String oldClose = tds.get(j).text();
         // System.out.println(oldClose);
         // }
+        
+        bond.setSourceDate(sysDate);
+        bond.setRecordDate(sysDate);
         bonds.add(bond);
         
       }

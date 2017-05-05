@@ -57,6 +57,13 @@ public class Bond implements Serializable{
   
   @Column
   private Float amount; // 规模 (亿)
+  
+  @Column(name = "src_dt")
+  private Date sourceDate;  // date 源系统数据日期
+
+  @Column(name = "rec_dt")
+  private Date recordDate; // 记录日期
+  
 
   public String getCode() {
     return code;
@@ -168,6 +175,22 @@ public class Bond implements Serializable{
 
   public void setDueDate(Date dueDate) {
     this.dueDate = dueDate;
+  }
+
+  public Date getSourceDate() {
+    return sourceDate;
+  }
+
+  public void setSourceDate(Date sourceDate) {
+    this.sourceDate = sourceDate;
+  }
+
+  public Date getRecordDate() {
+    return recordDate;
+  }
+
+  public void setRecordDate(Date recordDate) {
+    this.recordDate = recordDate;
   }
   
   

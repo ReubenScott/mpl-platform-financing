@@ -3,6 +3,7 @@ package com.soak.invest.bond.test;
 import java.util.List;
 import org.junit.Test;
 
+import com.soak.common.date.DateUtil;
 import com.soak.invest.bond.dao.BondDao;
 import com.soak.invest.bond.dao.impl.BondDaoImpl;
 import com.soak.invest.bond.model.Bond;
@@ -12,10 +13,10 @@ public class SpiderForBondsTest {
 
   @Test
   public void testGetBonds() {
+    BondDao bondDao = new BondDaoImpl();
+    bondDao.deleteBondsByDate(DateUtil.getCurrentShortDate());
     SpiderForBonds splider = new SpiderForBonds();
     List<Bond> bonds = splider.getBonds();
-    BondDao bondDao = new BondDaoImpl();
-    bondDao.wipeBonds();
     bondDao.addBonds(bonds);
 
   }

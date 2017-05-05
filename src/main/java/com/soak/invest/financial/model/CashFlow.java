@@ -1,4 +1,4 @@
-package com.soak.invest.finance.model;
+package com.soak.invest.financial.model;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.soak.invest.finance.model;
+package com.soak.invest.financial.model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,13 +10,13 @@ import javax.persistence.Table;
 
 
 /**
- * 資產負債表 
+ * 損益表 
  * @author soak
  *
  */
 @Entity
 @Table(schema = "finance", name = "bond")
-public class BalanceSheet implements Serializable{
+public class IncomeStatement implements Serializable{
 
   private static final long serialVersionUID = 1L;
   
