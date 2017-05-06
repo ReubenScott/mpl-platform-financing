@@ -1,23 +1,16 @@
 package com.soak.invest.financial.spider;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.helper.HttpConnection;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-
-import ch.qos.logback.classic.Logger;
-
 import com.soak.common.date.DateUtil;
 import com.soak.common.util.NumberUtils;
 import com.soak.common.util.StringUtil;
-import com.soak.invest.bond.model.Bond;
 import com.soak.invest.financial.model.FinancialSummary;
 
 public class SpiderForFinancialStatement {
@@ -29,9 +22,10 @@ public class SpiderForFinancialStatement {
   
   // 通过 新浪财经   取 财务摘要   数据
   // http://money.finance.sina.com.cn/corp/go.php/vFD_FinanceSummary/stockid/000001.phtml
-  public void getFinancialSummaryData() {
-    String stockCode = "000001" ;
-    String url = "http://money.finance.sina.com.cn/corp/go.php/vFD_FinanceSummary/stockid/"+stockCode +".phtml";
+  public List<FinancialSummary> getFinancialSummaryData(String stockcode) {
+    String url = "http://money.finance.sina.com.cn/corp/go.php/vFD_FinanceSummary/stockid/"+stockcode +".phtml";
+    List<FinancialSummary>  financialSummarys = new ArrayList<FinancialSummary> ();
+    
     try {
       Date sysDate = DateUtil.getCurrentShortDate();
       Connection connect = HttpConnection.connect(url);
@@ -45,12 +39,17 @@ public class SpiderForFinancialStatement {
       connect.maxBodySize(10 * 1024 * 1024); // 设置最大 10M jsoup 默许抓取页面大小为1M
       Document doc = connect.get();
       Elements table = doc.select("table#FundHoldSharesTable"); // 通过id 选取数据表格 
-      Elements trs = table.select("tbody tr"); // 取行数据
-
+      Elements head = table.select("thead tr").eq(0); // 取表头 标题
+      String stockName = head.select("th").get(0).text() ;
+      stockName = stockName.substring(0, stockName.indexOf("("));  // 获取名称
       
+      Elements trs = table.select("tbody tr"); // 取行数据
       int group =  13 ;
       for (int i = 0; i < trs.size()/group ; i++) {
         FinancialSummary financialSummary = new FinancialSummary();
+        financialSummary.setCode(stockcode);
+        financialSummary.setName(stockName);
+        
         financialSummary.setStatDate(trs.get(i*group).select("td").get(1).text()); // 截止日期 
         
         String netAssetPerShare = trs.get(i*group + 1).select("td").get(1).text().replace("元", "") ;  // 每股净资产
@@ -108,18 +107,21 @@ public class SpiderForFinancialStatement {
           financialSummary.setNetProfit(NumberUtils.parseBigDecimal(netProfit));  // 净利润
         }
         
-        System.out.println(financialSummary);
+        financialSummarys.add(financialSummary);
       }
       
       
     } catch (IOException e) {
       e.printStackTrace();
     }
+    
+    return financialSummarys ;
   }
   
   public static void main(String args[]){
+    String stockCode = "000001" ;
     SpiderForFinancialStatement  instance = new SpiderForFinancialStatement();
-    instance.getFinancialSummaryData();
+    instance.getFinancialSummaryData(stockCode);
   }
   
 }

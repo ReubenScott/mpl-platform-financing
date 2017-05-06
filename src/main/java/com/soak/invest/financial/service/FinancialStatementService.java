@@ -1,0 +1,1 @@
+package com.soak.invest.financial.service;import java.util.List;import com.soak.invest.financial.model.FinancialSummary;public interface FinancialStatementService {    public List<FinancialSummary> crawlingFinancialStatement(String stockcode);      }

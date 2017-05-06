@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import com.soak.common.date.DateUtil;
 import com.soak.invest.bond.dao.BondDao;
-import com.soak.invest.bond.dao.impl.BondDaoImpl;
+import com.soak.invest.bond.dao.imp.BondDaoImp;
 import com.soak.invest.bond.model.Bond;
 import com.soak.invest.bond.spider.SpiderForBonds;
 
@@ -13,12 +13,11 @@ public class SpiderForBondsTest {
 
   @Test
   public void testGetBonds() {
-    BondDao bondDao = new BondDaoImpl();
+    BondDao bondDao = new BondDaoImp();
     bondDao.deleteBondsByDate(DateUtil.getCurrentShortDate());
     SpiderForBonds splider = new SpiderForBonds();
     List<Bond> bonds = splider.getBonds();
     bondDao.addBonds(bonds);
-
   }
 
   // public void batchAddExamlog(List examlogList) throws SQLException {
