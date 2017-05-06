@@ -77,6 +77,17 @@ public class FinancialSummary implements Serializable {
   @Column(name = "net_profit")
   private BigDecimal netProfit; // 净利润
 
+  @Column(name = "main_revenue_growth_rate")
+  private Float mainRevenueGrowthRate; // 主营收入增长率
+
+  @Column(name = "net_profit_growth_rate")
+  private Float netProfitGrowthRate; // 净利润增长率
+
+  @Column(name = "net_assets_return_rate")
+  private Float netAssetsReturnRate; // 净资产收益率
+  
+  
+
   public String getStatDate() {
     return statDate;
   }
@@ -197,4 +208,30 @@ public class FinancialSummary implements Serializable {
     this.netProfit = netProfit;
   }
 
+  public Float getMainRevenueGrowthRate() {
+    return mainRevenueGrowthRate;
+  }
+
+  public void setMainRevenueGrowthRate(Float mainRevenueGrowthRate) {
+    this.mainRevenueGrowthRate = mainRevenueGrowthRate;
+  }
+
+  public Float getNetProfitGrowthRate() {
+    return netProfitGrowthRate;
+  }
+
+  public void setNetProfitGrowthRate(Float netProfitGrowthRate) {
+    this.netProfitGrowthRate = netProfitGrowthRate;
+  }
+
+  public Float getNetAssetsReturnRate() {
+    return netAssetsReturnRate;
+  }
+
+  public void setNetAssetsReturnRate(Float netAssetsReturnRate) {
+    this.netAssetsReturnRate = netAssetsReturnRate;
+  }
+
+  
+  
 }

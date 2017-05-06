@@ -33,9 +33,16 @@ public class FinancialStatementServiceImpTest {
 
   @Test
   public void testCrawlingFinancialStatement() {
-    financialStatementService.crawlingFinancialStatement("000651");
+//    financialStatementService.crawlingFinancialStatement("000651");
+    financialStatementService.crawlingFinancialStatementFromSohu("2017-03-31");
+    
   }
 
+//  @Test
+  public void testCrawlingBalanceSheet() {
+    financialStatementService.crawlingBalanceSheet("000651","2016");
+  }
+  
 //  @Test
   public void testDownloadExcel() {
     String url = "http://money.finance.sina.com.cn/corp/go.php/vDOWN_BalanceSheet/displaytype/4/stockid/601088/ctrl/all.phtml" ;

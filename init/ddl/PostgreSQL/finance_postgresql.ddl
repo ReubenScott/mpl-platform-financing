@@ -62,6 +62,9 @@ CREATE TABLE finance.financial_summary (
 	revenue decimal,
 	finance_expense decimal,
 	net_profit decimal,
+    main_revenue_growth_rate  float,
+    net_profit_growth_rate  float,
+    net_assets_return_rate float,
 	rec_dt date
 )
 WITH (OIDS=FALSE)

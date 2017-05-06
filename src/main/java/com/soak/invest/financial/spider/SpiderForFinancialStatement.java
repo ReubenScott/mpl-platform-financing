@@ -15,6 +15,7 @@ import com.soak.common.date.DateUtil;
 import com.soak.common.http.JsoupUtil;
 import com.soak.common.util.NumberUtils;
 import com.soak.common.util.StringUtil;
+import com.soak.invest.financial.model.BalanceSheet;
 import com.soak.invest.financial.model.FinancialSummary;
 
 public class SpiderForFinancialStatement {
@@ -22,7 +23,8 @@ public class SpiderForFinancialStatement {
   public void execute() {
 
   };
-
+  
+  
   /**
    * 
    * 财务摘要 数据
@@ -110,17 +112,27 @@ public class SpiderForFinancialStatement {
     return financialSummarys;
   }
 
-  //  
 
   /**
    * 
    * 資產負債表
    * 新浪财经
-   * http://vip.stock.finance.sina.com.cn/corp/go.php/vFD_ProfitStatement/stockid/000651/ctrl/part/displaytype/4.phtml
-   * http://money.finance.sina.com.cn/corp/go.php/vFD_ProfitStatement/stockid/000651/ctrl/2016/displaytype/4.phtml
+   * http://money.finance.sina.com.cn/corp/go.php/vFD_BalanceSheet/stockid/000651/ctrl/2016/displaytype/4.phtml
    */
-  public List<FinancialSummary> getBalanceSheetData(String stockcode, String year) {
+  public List<BalanceSheet> getBalanceSheetData(String stockcode, String year) {
+    String url = "http://money.finance.sina.com.cn/corp/go.php/vFD_BalanceSheet/stockid/"+stockcode + "/ctrl/"+ year +"/displaytype/4.phtml" ;
+    List<BalanceSheet> balanceSheets = new ArrayList<BalanceSheet>();
 
+    Date sysDate = DateUtil.getCurrentShortDate();
+    Document doc = JsoupUtil.getWebDocument(url); // 抓取网页
+    Elements table = doc.select("table#BalanceSheetNewTable0"); // 通过id 选取数据表格
+    Elements head = table.select("thead tr").eq(0); // 取表头 标题
+    String stockName = head.select("th").get(0).text();
+    stockName = stockName.substring(0, stockName.indexOf("(")); // 获取名称
+    
+    
+    
+    
     return null;
   }
 
