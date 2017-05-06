@@ -16,71 +16,58 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import com.soak.common.date.DateUtil;
+import com.soak.common.http.JsoupUtil;
 import com.soak.invest.bond.model.Bond;
 
 public class SpiderForBonds {
-
 
   // 通过 集思录 取 债券 数据
   public List<Bond> getBonds() {
     List<Bond> bonds = new ArrayList<Bond>();
     String url = "https://www.jisilu.cn/data/bond/?do_search=true&forall=1&treasury=0&from_issuer_rating=1&from_volume=0&to_issuer_rating=99";
-    try {
-      Date sysDate = DateUtil.getCurrentShortDate();
-      Connection connect = HttpConnection.connect(url);
-      // Connection connect = Jsoup.connect(url);
-      // connect.timeout(timeout);
-      connect.header("Accept-Encoding", "gzip,deflate,sdch");
-      connect.header("Connection", "close");
-      connect.validateTLSCertificates(false);
+    Date sysDate = DateUtil.getCurrentShortDate();
+    Document doc = JsoupUtil.getWebDocument(url);
+    Elements table = doc.select("table").eq(3); // 取债券数据表格
+    Elements trs = table.select("tr"); // 取行数据
 
-      // String yellowNews = conn.execute().body();
-      connect.maxBodySize(10 * 1024 * 1024); // 设置最大 10M jsoup 默许抓取页面大小为1M
-      Document doc = connect.get();
-      Elements table = doc.select("table").eq(3); // 取债券数据表格
-      Elements trs = table.select("tr"); // 取行数据
+    for (int i = 2; i < trs.size(); i++) {
+      Elements tds = trs.get(i).select("td"); // 获取每一行的列数据
+      Bond bond = new Bond();
+      bond.setCode(tds.get(0).text()); // 
+      bond.setName(tds.get(1).text()); // 
+      bond.setNetPrice(Float.valueOf(tds.get(2).text())); // 
+      bond.setFullPrice(Float.valueOf(tds.get(3).text())); // 
 
-      for (int i = 2; i < trs.size(); i++) {
-        Elements tds = trs.get(i).select("td"); // 获取每一行的列数据
-        Bond bond = new Bond();
-        bond.setCode(tds.get(0).text()); // 
-        bond.setName(tds.get(1).text()); // 
-        bond.setNetPrice(Float.valueOf(tds.get(2).text())); // 
-        bond.setFullPrice(Float.valueOf(tds.get(3).text())); // 
-
-        if (bond.getName().contains("PR") || bond.getNetPrice() < 90f) {
-          float balance = getBondBalance(bond.getCode());
-          if (balance > 0) {
-            bond.setFacePrice(balance);
-          }
-        } else {
-          bond.setFacePrice(100f); // 默认面值为 100 元
+      if (bond.getName().contains("PR") || bond.getNetPrice() < 90f) {
+        float balance = getBondBalance(bond.getCode());
+        if (balance > 0) {
+          bond.setFacePrice(balance);
         }
-
-        bond.setAccruedInterest(Float.valueOf(tds.get(3).text()) - Float.valueOf(tds.get(2).text())); // 
-        bond.setTurnVolume(Float.valueOf(tds.get(5).text())); // 
-        if (!StringUtils.isEmpty(tds.get(6).text())) {
-          bond.setInpaydays(Integer.valueOf(tds.get(6).text())); // 
-        }
-        bond.setCouponRate(Float.valueOf(tds.get(11).text())); // 
-        bond.setBondCredit(tds.get(14).text()); // 
-        bond.setMainCredit(tds.get(15).text()); // 
-        bond.setAssukind(tds.get(16).text()); // 
-        bond.setDueDate(DateUtil.parseShortDate(tds.get(17).text())); // 
-        bond.setAmount(Float.valueOf(tds.get(18).text())); // 
-
-        // for (int j = 0; j < tds.size(); j++) {
-        // String oldClose = tds.get(j).text();
-        // System.out.println(oldClose);
-        // }
-        
-        bond.setSourceDate(sysDate);
-        bond.setRecordDate(sysDate);
-        bonds.add(bond);
-        
+      } else {
+        bond.setFacePrice(100f); // 默认面值为 100 元
       }
-    } catch (IOException e) {
-      e.printStackTrace();
+
+      bond.setAccruedInterest(Float.valueOf(tds.get(3).text()) - Float.valueOf(tds.get(2).text())); // 
+      bond.setTurnVolume(Float.valueOf(tds.get(5).text())); // 
+      if (!StringUtils.isEmpty(tds.get(6).text())) {
+        bond.setInpaydays(Integer.valueOf(tds.get(6).text())); // 
+      }
+      bond.setCouponRate(Float.valueOf(tds.get(11).text())); // 
+      bond.setBondCredit(tds.get(14).text()); // 
+      bond.setMainCredit(tds.get(15).text()); // 
+      bond.setAssukind(tds.get(16).text()); // 
+      bond.setDueDate(DateUtil.parseShortDate(tds.get(17).text())); // 
+      bond.setAmount(Float.valueOf(tds.get(18).text())); // 
+
+      // for (int j = 0; j < tds.size(); j++) {
+      // String oldClose = tds.get(j).text();
+      // System.out.println(oldClose);
+      // }
+
+      bond.setSourceDate(sysDate);
+      bond.setRecordDate(sysDate);
+      bonds.add(bond);
+
     }
 
     return bonds;

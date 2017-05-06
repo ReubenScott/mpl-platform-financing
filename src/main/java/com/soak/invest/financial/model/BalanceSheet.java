@@ -15,7 +15,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(schema = "finance", name = "bond")
+@Table(schema = "finance", name = "balance_sheet")
 public class BalanceSheet implements Serializable{
 
   private static final long serialVersionUID = 1L;

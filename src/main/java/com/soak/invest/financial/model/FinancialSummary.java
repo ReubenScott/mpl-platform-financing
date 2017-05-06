@@ -4,8 +4,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.soak.common.constant.CurrencyType;
 
 /**
  * 财务摘要
@@ -37,6 +41,7 @@ public class FinancialSummary implements Serializable {
   @Column
   private String name; // 名称
 
+  @Column
   private String currency; // 币种
 
   @Column(name = "net_asset_per_share")

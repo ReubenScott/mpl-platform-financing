@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.soak.common.io.FileUtil;
 import com.soak.invest.financial.service.FinancialStatementService;
 
 public class FinancialStatementServiceImpTest {
@@ -30,62 +31,15 @@ public class FinancialStatementServiceImpTest {
   public void setUp() throws Exception {
   }
 
-  // @Test
+  @Test
   public void testCrawlingFinancialStatement() {
     financialStatementService.crawlingFinancialStatement("000651");
   }
 
-  @Test
+//  @Test
   public void testDownloadExcel() {
     String url = "http://money.finance.sina.com.cn/corp/go.php/vDOWN_BalanceSheet/displaytype/4/stockid/601088/ctrl/all.phtml" ;
-    downloadFile(url, "D:\\601088.xls");
-  }
-  
-
-  /**
-   * 下载远程文件并保存到本地
-   * 
-   * @param remoteFilePath
-   *          远程文件路径
-   * @param localFilePath
-   *          本地文件路径
-   */
-  public static void downloadFile(String remoteFilePath, String localFilePath) {
-    URL urlfile = null;
-    HttpURLConnection httpUrl = null;
-    BufferedInputStream bis = null;
-    BufferedOutputStream bos = null;
-    Workbook workbook ;  
-    
-    File f = new File(localFilePath);
-    try {
-      urlfile = new URL(remoteFilePath);
-      httpUrl = (HttpURLConnection) urlfile.openConnection();
-      httpUrl.connect();
-      bis = new BufferedInputStream(httpUrl.getInputStream());
-      bos = new BufferedOutputStream(new FileOutputStream(f));
-      
-      workbook = new HSSFWorkbook(bis);  
-      workbook.write(bos);
-      
-//      int len = 2048;
-//      byte[] b = new byte[len];
-//      while ((len = bis.read(b)) != -1) {
-//        bos.write(b, 0, len);
-//      }
-//      bos.flush();
-//      bis.close();
-      httpUrl.disconnect();
-    } catch (Exception e) {
-      e.printStackTrace();
-    } finally {
-      try {
-        bis.close();
-        bos.close();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
+    FileUtil.downloadFile(url, "D:\\未命名.xls");
   }
   
 
