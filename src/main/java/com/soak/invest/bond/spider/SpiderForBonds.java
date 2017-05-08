@@ -8,7 +8,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.helper.HttpConnection;
@@ -17,6 +16,7 @@ import org.jsoup.select.Elements;
 
 import com.soak.common.date.DateUtil;
 import com.soak.common.http.JsoupUtil;
+import com.soak.common.util.StringUtil;
 import com.soak.invest.bond.model.Bond;
 
 public class SpiderForBonds {
@@ -49,7 +49,7 @@ public class SpiderForBonds {
 
       bond.setAccruedInterest(Float.valueOf(tds.get(3).text()) - Float.valueOf(tds.get(2).text())); // 
       bond.setTurnVolume(Float.valueOf(tds.get(5).text())); // 
-      if (!StringUtils.isEmpty(tds.get(6).text())) {
+      if (!StringUtil.isEmpty(tds.get(6).text())) {
         bond.setInpaydays(Integer.valueOf(tds.get(6).text())); // 
       }
       bond.setCouponRate(Float.valueOf(tds.get(11).text())); // 
@@ -91,11 +91,11 @@ public class SpiderForBonds {
         Elements tds = trs.get(i).select("td"); // 获取每一行的列数据
         String datetext = tds.eq(0).text();
         String honorcashflow = tds.eq(3).text();
-        if (StringUtils.isEmpty(datetext)) { // 表头
+        if (StringUtil.isEmpty(datetext)) { // 表头
           continue;
         }
         float honor = 0f;
-        if (!StringUtils.isEmpty(honorcashflow.trim())) { // 表头
+        if (!StringUtil.isEmpty(honorcashflow.trim())) { // 表头
           honor = Float.valueOf(tds.eq(3).text());
         }
 

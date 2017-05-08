@@ -126,10 +126,6 @@
       <groupId>com.soak</groupId>
       <artifactId>jdbc</artifactId>
     </dependency>
-    <dependency>
-      <groupId>com.soak</groupId>
-      <artifactId>etl</artifactId>
-    </dependency>
 
 
     <!-- DB Driver Start  -->
@@ -190,11 +186,21 @@
     </dependency>
     <!-- 网络爬虫   end  -->
 
-    <dependency>
-      <groupId>net.sf.json-lib</groupId>
-      <artifactId>json-lib</artifactId>
-      <classifier>jdk15</classifier>
-    </dependency>
+      <!-- JSON Start -->
+      <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-core-asl</artifactId>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-mapper-asl</artifactId>
+      </dependency>
+      <dependency>
+        <groupId>net.sf.json-lib</groupId>
+        <artifactId>json-lib</artifactId>
+        <classifier>jdk15</classifier>
+      </dependency>
+      <!-- JSON End -->
 
     <dependency>
       <groupId>jfree</groupId>
