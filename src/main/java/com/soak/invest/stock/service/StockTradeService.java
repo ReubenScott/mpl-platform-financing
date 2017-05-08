@@ -1,0 +1,1 @@
+package com.soak.invest.stock.service;import java.util.List;import com.soak.invest.stock.model.StockTradeData;public interface StockTradeService {    public List<StockTradeData> crawlingStockTradeData(String symbol);}
