@@ -1,5 +1,7 @@
 package com.soak.invest.stock.spider;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +10,10 @@ import org.jsoup.select.Elements;
 
 import com.soak.common.constant.CurrencyType;
 import com.soak.common.http.JsoupUtil;
+import com.soak.common.io.IOHandler;
 import com.soak.common.util.NumberUtils;
 import com.soak.common.util.StringUtil;
+import com.soak.framework.jdbc.core.JdbcTemplate;
 import com.soak.invest.financial.model.FinancialSummary;
 import com.soak.invest.stock.model.StockTradeData;
 
@@ -55,14 +59,23 @@ public class SpiderForStocks {
 
     return stockTradeDatas;
   }
+  
+  
+  
+  public void getStockTradeDataFromYahoo(String symbol) {
+  }
 
   public static void main(String args[]) {
-    SpiderForStocks spider = new SpiderForStocks();
-    List<StockTradeData> tradeDatas = spider.getStockTradeData("02010");
-    System.out.println(tradeDatas.size());
-    for (StockTradeData tradeData : tradeDatas) {
-      System.out.println(tradeData.getTradeDate());
-    }
+    String url = "https://table.finance.yahoo.com/table.csv?s=ibm" ;
+    InputStream in = new ByteArrayInputStream(IOHandler.readURLStream(url)) ; 
+    JdbcTemplate.getInstance().loadCsvFile("finance", "stock_trade", in, ',', '"', 1);
+    
+//    SpiderForStocks spider = new SpiderForStocks();
+//    List<StockTradeData> tradeDatas = spider.getStockTradeData("02010");
+//    System.out.println(tradeDatas.size());
+//    for (StockTradeData tradeData : tradeDatas) {
+//      System.out.println(tradeData.getTradeDate());
+//    }
   }
 
 }
