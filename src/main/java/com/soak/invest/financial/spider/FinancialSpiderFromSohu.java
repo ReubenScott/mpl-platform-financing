@@ -9,7 +9,7 @@ import org.jsoup.select.Elements;
 import com.soak.common.constant.CurrencyType;
 import com.soak.common.date.DateUtil;
 import com.soak.common.http.JsoupUtil;
-import com.soak.common.util.NumberUtils;
+import com.soak.common.util.NumberUtil;
 import com.soak.common.util.StringUtil;
 import com.soak.invest.financial.model.BalanceSheet;
 import com.soak.invest.financial.model.FinancialSummary;
@@ -46,15 +46,15 @@ public class FinancialSpiderFromSohu {
 
         String earningsPerShare = tds.get(5).text().replace("--", ""); // 每股收益
         if (!StringUtil.isEmpty(earningsPerShare)) {
-          financialSummary.setEarningsPerShare(NumberUtils.parseBigDecimal(earningsPerShare)); // 每股收益
+          financialSummary.setEarningsPerShare(NumberUtil.parseBigDecimal(earningsPerShare)); // 每股收益
         }
         String netAssetPerShare = tds.get(6).text().replace("--", ""); // 每股净资产
         if (!StringUtil.isEmpty(netAssetPerShare)) {
-          financialSummary.setNetAssetPerShare(NumberUtils.parseBigDecimal(netAssetPerShare)); // 每股净资产
+          financialSummary.setNetAssetPerShare(NumberUtil.parseBigDecimal(netAssetPerShare)); // 每股净资产
         }
         String capitalReservesPerShare = tds.get(7).text().replace("--", ""); // 每股资本公积金
         if (!StringUtil.isEmpty(capitalReservesPerShare)) {
-          financialSummary.setCapitalReservesPerShare(NumberUtils.parseBigDecimal(capitalReservesPerShare)); // 每股资本公积金
+          financialSummary.setCapitalReservesPerShare(NumberUtil.parseBigDecimal(capitalReservesPerShare)); // 每股资本公积金
         }
 
         String mainRevenueGrowthRate = tds.get(8).text().replace("--", ""); // 主营收入增长率

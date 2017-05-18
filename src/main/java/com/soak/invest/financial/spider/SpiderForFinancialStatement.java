@@ -1,19 +1,16 @@
 package com.soak.invest.financial.spider;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.Date;
 import java.util.List;
-import org.jsoup.Connection;
-import org.jsoup.helper.HttpConnection;
+
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import com.soak.common.constant.CurrencyType;
 import com.soak.common.date.DateUtil;
 import com.soak.common.http.JsoupUtil;
-import com.soak.common.util.NumberUtils;
+import com.soak.common.util.NumberUtil;
 import com.soak.common.util.StringUtil;
 import com.soak.invest.financial.model.BalanceSheet;
 import com.soak.invest.financial.model.FinancialSummary;
@@ -53,57 +50,57 @@ public class SpiderForFinancialStatement {
 
       String netAssetPerShare = trs.get(i * group + 1).select("td").get(1).text().replace("元", ""); // 每股净资产
       if (!StringUtil.isEmpty(netAssetPerShare)) {
-        financialSummary.setNetAssetPerShare(NumberUtils.parseBigDecimal(netAssetPerShare)); // 每股净资产
+        financialSummary.setNetAssetPerShare(NumberUtil.parseBigDecimal(netAssetPerShare)); // 每股净资产
       }
 
       String earningsPerShare = trs.get(i * group + 2).select("td").get(1).text().replace("元", ""); // 每股收益
       if (!StringUtil.isEmpty(earningsPerShare)) {
-        financialSummary.setEarningsPerShare(NumberUtils.parseBigDecimal(earningsPerShare)); // 每股收益
+        financialSummary.setEarningsPerShare(NumberUtil.parseBigDecimal(earningsPerShare)); // 每股收益
       }
 
       String cashPerShare = trs.get(i * group + 3).select("td").get(1).text().replace("元", ""); // 每股现金含量
       if (!StringUtil.isEmpty(cashPerShare)) {
-        financialSummary.setCashPerShare(NumberUtils.parseBigDecimal(cashPerShare)); // 每股现金含量
+        financialSummary.setCashPerShare(NumberUtil.parseBigDecimal(cashPerShare)); // 每股现金含量
       }
 
       String capitalReservesPerShare = trs.get(i * group + 4).select("td").get(1).text().replace("元", ""); // 每股资本公积金
       if (!StringUtil.isEmpty(capitalReservesPerShare)) {
-        financialSummary.setCapitalReservesPerShare(NumberUtils.parseBigDecimal(capitalReservesPerShare)); // 每股资本公积金
+        financialSummary.setCapitalReservesPerShare(NumberUtil.parseBigDecimal(capitalReservesPerShare)); // 每股资本公积金
       }
 
       String netFixedAssets = trs.get(i * group + 5).select("td").get(1).text().replace("元", ""); // 固定资产合计
       if (!StringUtil.isEmpty(netFixedAssets)) {
-        financialSummary.setNetFixedAssets(NumberUtils.parseBigDecimal(netFixedAssets)); // 固定资产合计
+        financialSummary.setNetFixedAssets(NumberUtil.parseBigDecimal(netFixedAssets)); // 固定资产合计
       }
 
       String totalCurrentAssets = trs.get(i * group + 6).select("td").get(1).text().replace("元", ""); // 流动资产合计
       if (!StringUtil.isEmpty(totalCurrentAssets)) {
-        financialSummary.setTotalCurrentAssets(NumberUtils.parseBigDecimal(totalCurrentAssets)); // 流动资产合计
+        financialSummary.setTotalCurrentAssets(NumberUtil.parseBigDecimal(totalCurrentAssets)); // 流动资产合计
       }
 
       String totalAssets = trs.get(i * group + 7).select("td").get(1).text().replace("元", ""); // 资产总计
       if (!StringUtil.isEmpty(totalAssets)) {
-        financialSummary.setTotalAssets(NumberUtils.parseBigDecimal(totalAssets)); // 资产总计
+        financialSummary.setTotalAssets(NumberUtil.parseBigDecimal(totalAssets)); // 资产总计
       }
 
       String totalLongtermLiability = trs.get(i * group + 8).select("td").get(1).text().replace("元", ""); // 长期负债合计
       if (!StringUtil.isEmpty(totalLongtermLiability)) {
-        financialSummary.setTotalLongtermLiability(NumberUtils.parseBigDecimal(totalLongtermLiability)); // 长期负债合计
+        financialSummary.setTotalLongtermLiability(NumberUtil.parseBigDecimal(totalLongtermLiability)); // 长期负债合计
       }
 
       String revenue = trs.get(i * group + 9).select("td").get(1).text().replace("元", ""); // 主营业务收入
       if (!StringUtil.isEmpty(revenue)) {
-        financialSummary.setRevenue(NumberUtils.parseBigDecimal(revenue)); // 主营业务收入
+        financialSummary.setRevenue(NumberUtil.parseBigDecimal(revenue)); // 主营业务收入
       }
 
       String financeExpense = trs.get(i * group + 10).select("td").get(1).text().replace("元", ""); // 财务费用
       if (!StringUtil.isEmpty(financeExpense)) {
-        financialSummary.setFinanceExpense(NumberUtils.parseBigDecimal(financeExpense)); // 财务费用
+        financialSummary.setFinanceExpense(NumberUtil.parseBigDecimal(financeExpense)); // 财务费用
       }
 
       String netProfit = trs.get(i * group + 11).select("td").get(1).text().replace("元", ""); // 净利润
       if (!StringUtil.isEmpty(netProfit)) {
-        financialSummary.setNetProfit(NumberUtils.parseBigDecimal(netProfit)); // 净利润
+        financialSummary.setNetProfit(NumberUtil.parseBigDecimal(netProfit)); // 净利润
       }
 
       financialSummarys.add(financialSummary);

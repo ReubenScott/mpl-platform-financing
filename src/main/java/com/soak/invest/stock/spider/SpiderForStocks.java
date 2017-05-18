@@ -1,20 +1,14 @@
 package com.soak.invest.stock.spider;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import com.soak.common.constant.CurrencyType;
 import com.soak.common.http.JsoupUtil;
 import com.soak.common.io.IOHandler;
-import com.soak.common.util.NumberUtils;
-import com.soak.common.util.StringUtil;
 import com.soak.framework.jdbc.core.JdbcTemplate;
-import com.soak.invest.financial.model.FinancialSummary;
 import com.soak.invest.stock.model.StockTradeData;
 
 public class SpiderForStocks {
