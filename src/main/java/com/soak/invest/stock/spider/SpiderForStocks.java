@@ -62,7 +62,7 @@ public class SpiderForStocks {
   public static void main(String args[]) {
     String url = "https://table.finance.yahoo.com/table.csv?s=ibm" ;
 //    InputStream in = new ByteArrayInputStream(IOHandler.readURLStream(url)) ; 
-    JdbcTemplate.getInstance().loadCsvFile("finance", "stock_trade", IOHandler.getURLInputStream(url), ',', '"', 1);
+    JdbcTemplate.getInstance().loadDelStream("finance", "stock_trade", IOHandler.getURLInputStream(url), ',', '"', 1);
     
 //    SpiderForStocks spider = new SpiderForStocks();
 //    List<StockTradeData> tradeDatas = spider.getStockTradeData("02010");
