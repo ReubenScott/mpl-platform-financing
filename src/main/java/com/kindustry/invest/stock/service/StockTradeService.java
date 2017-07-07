@@ -1,0 +1,1 @@
+package com.kindustry.invest.stock.service;import java.util.List;import com.kindustry.invest.stock.model.StockTradeData;public interface StockTradeService {    public List<StockTradeData> crawlingStockTradeData(String symbol);}
