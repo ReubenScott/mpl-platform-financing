@@ -11,8 +11,6 @@ import javax.persistence.Table;
 /**
  * 資產負債表
  * 
- * @author soak
- * 
  */
 @Entity
 @Table(schema = "finance", name = "balance_sheet")

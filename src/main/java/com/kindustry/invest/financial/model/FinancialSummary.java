@@ -14,8 +14,6 @@ import com.kindustry.common.constant.CurrencyType;
 /**
  * 财务摘要
  * 
- * @author soak
- * 
  */
 @Entity
 @Table(schema = "finance", name = "financial_summary")

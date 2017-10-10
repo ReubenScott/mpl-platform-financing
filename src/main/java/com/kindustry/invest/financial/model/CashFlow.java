@@ -11,7 +11,6 @@ import javax.persistence.Table;
 
 /**
  * 現金流量表 
- * @author soak
  *
  */
 @Entity

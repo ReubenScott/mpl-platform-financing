@@ -11,7 +11,6 @@ import javax.persistence.Table;
 
 /**
  * 損益表 
- * @author soak
  *
  */
 @Entity
