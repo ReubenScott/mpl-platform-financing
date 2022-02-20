@@ -16,7 +16,7 @@ public class StockTradeServiceImp implements StockTradeService {
   public List<StockTradeData> crawlingStockTradeData(String symbol) {
     SpiderForStocks instance = new SpiderForStocks();
     List<StockTradeData> stockTradeDatas = instance.getStockTradeData(symbol);
-    StockTradeDao.saveAnnotatedBean(stockTradeDatas);
+    StockTradeDao.saveAnnotatedEntity(stockTradeDatas);
     return stockTradeDatas;
   }
 

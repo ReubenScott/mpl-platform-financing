@@ -2,16 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.kindustry</groupId>
   <artifactId>financing</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
 
   <parent>
     <groupId>com.kindustry</groupId>
-    <artifactId>epl-parent-pom</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <relativePath>../epl-parent-pom</relativePath>
+    <artifactId>mpl-platform-pom</artifactId>
+    <version>1.0</version>
+    <relativePath>../mpl-platform-pom</relativePath>
   </parent>
 
 
@@ -131,7 +129,7 @@
     <!-- DB Driver Start  -->
     <!-- PostgreSQL -->
     <dependency>
-      <groupId>postgresql</groupId>
+      <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
     </dependency>
 
@@ -219,11 +217,6 @@
       <groupId>org.codehaus.jackson</groupId>
       <artifactId>jackson-mapper-asl</artifactId>
     </dependency>
-    <dependency>
-      <groupId>net.sf.json-lib</groupId>
-      <artifactId>json-lib</artifactId>
-      <classifier>jdk15</classifier>
-    </dependency>
     <!-- JSON End -->
 
     <dependency>
@@ -234,7 +227,6 @@
     <dependency>
       <groupId>net.sf.ehcache</groupId>
       <artifactId>ehcache</artifactId>
-      <version>1.2</version>
     </dependency>
 
 

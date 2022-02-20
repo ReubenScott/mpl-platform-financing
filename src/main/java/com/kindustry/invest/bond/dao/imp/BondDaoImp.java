@@ -18,11 +18,11 @@ public class BondDaoImp extends BasicDaoImp implements BondDao {
   };
 
   public void addBond(Bond... bond) {
-    saveAnnotatedBean(bond);
+    saveAnnotatedEntity(bond);
   }
   
   public void addBonds(List<Bond> bonds) {
-    saveAnnotatedBean(bonds);
+    saveAnnotatedEntity(bonds);
   }
 
 //  @Override
